@@ -58,6 +58,18 @@ class Player : public Character {
 public:
     Player(const std::string& playerName, int playerHealth, int characterStrength)
         :Character(playerName, playerHealth, characterStrength) {}
+
+    void randomlyHealPlayer() {
+        int healAmount = std::rand() % 50 + 1; // heal between 1 and 50 point
+        healPlayer(healAmount);
+    }
+
+    void healPlayer(int amount) {
+        if (health > 0) {
+            health = health + amount;
+            std::cout << "Player healed by " << amount << " points.\n";
+        }
+    }
 };
 
 class Enemy : public Character {
@@ -104,7 +116,7 @@ public:
                 std::cout << "Weapon not equipped. Cannot fight.\n";
                 break;
             }
-            randomlyHealPlayer();
+            player.randomlyHealPlayer();
         }
         equipRandomWeapon(player);
         equipRandomWeapon(enemy);
@@ -145,17 +157,17 @@ public:
         return selectedWeapon;
     }
 
-    void randomlyHealPlayer() {
-        int healAmount = std::rand() % 50 + 1; // heal between 1 and 50 point
-        healPlayer(healAmount);
-    }
+    //void randomlyHealPlayer() {
+    //    int healAmount = std::rand() % 50 + 1; // heal between 1 and 50 point
+    //    healPlayer(healAmount);
+    //}
 
-    void healPlayer(int amount) {
-        if (player.getHealth() > 0) {
-            player.setHealth(player.getHealth() + amount);
-            std::cout << "Player healed by " << amount << " points.\n";
-        }
-    }
+    //void healPlayer(int amount) {
+    //    if (player.getHealth() > 0) {
+    //        player.setHealth(player.getHealth() + amount);
+    //        std::cout << "Player healed by " << amount << " points.\n";
+    //    }
+    //}
 };
 
 // Main Function
