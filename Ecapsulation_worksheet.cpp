@@ -51,6 +51,18 @@ public:
         
         std::cout << name << "take damage " << damage << "\n";
     }
+    bool isAlive()
+    {
+        if (health <= 0)
+        {
+            std::cout << getName() << " has been defeated.\n";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
 };
 
@@ -70,12 +82,28 @@ public:
             std::cout << "Player healed by " << amount << " points.\n";
         }
     }
+
+  /*  bool checkPlayerAlive()
+    {
+        if (health <= 0) {
+            std::cout << getName() << " has been defeated.\n";
+            return false;
+        }
+    }*/
 };
 
 class Enemy : public Character {
 public:
     Enemy(const std::string& EnemyName, int EnemyHealth, int characterStrength)
         :Character(EnemyName, EnemyHealth, characterStrength) {}
+
+  /*  bool checkEnemyAlive()
+    {
+        if (getHealth() <= 0) {
+            std::cout << getName() << " has been defeated.\n";
+            return false;
+        }
+    }*/
 
 };
 
@@ -117,20 +145,31 @@ public:
                 break;
             }
             player.randomlyHealPlayer();
+            bool palive = player.isAlive();
+            bool ealive = enemy.isAlive();
+        
+           if (palive == false)
+            {
+                return 1;
+            }
+            if (ealive == false)
+            {
+                return 0;
+            };
         }
         equipRandomWeapon(player);
         equipRandomWeapon(enemy);
 
 
         
-        if (player.getHealth() <= 0) {
+        /*if (player.getHealth() <= 0) {
             std::cout << player.getName() << " has been defeated.\n";
             return 1;
         }
         else if (enemy.getHealth() <= 0) {
             std::cout << enemy.getName() << " has been defeated.\n";
             return 0;
-        }
+        }*/
     }
 
     void equipPlayerWeapon(int weaponIndex) {
@@ -157,17 +196,7 @@ public:
         return selectedWeapon;
     }
 
-    //void randomlyHealPlayer() {
-    //    int healAmount = std::rand() % 50 + 1; // heal between 1 and 50 point
-    //    healPlayer(healAmount);
-    //}
-
-    //void healPlayer(int amount) {
-    //    if (player.getHealth() > 0) {
-    //        player.setHealth(player.getHealth() + amount);
-    //        std::cout << "Player healed by " << amount << " points.\n";
-    //    }
-    //}
+    
 };
 
 // Main Function
